@@ -8,6 +8,7 @@ module.exports = function (app) {
 
     .get(function (req, res) {
       let project = req.params.project;
+      //console.log("get", project);
       let fname = `./data/${project}.json`;
       const query = req.query;
       let filter = "";
@@ -29,7 +30,8 @@ module.exports = function (app) {
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          return;
+          //console.log("get error", project);
+          return res.send(`${project} project doesn't exist`);
         }
         // console.log(JSON.parse(data));
         let result = JSON.parse(data);
