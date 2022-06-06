@@ -77,10 +77,11 @@ module.exports = function (app) {
         readData = JSON.parse(data);
         const id =
           readData.length > 0
-            ? Math.max(...readData.map((i) => Number(i._id))) + 1
-            : 1;
+            ? String(Math.max(...readData.map((i) => Number(i._id))) + 1)
+            : "1";
+        console.log(typeof id);
         const response = {
-          _id: id,
+          _id: String(id),
           issue_title,
           issue_text,
           created_on,
@@ -109,7 +110,7 @@ module.exports = function (app) {
       const response = req.body;
       const id = response._id;
       if (!id) {
-        res.json({ error: "missing_id" });
+        res.json({ error: "missing _id" });
         return;
       }
 
