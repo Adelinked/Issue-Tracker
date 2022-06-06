@@ -9,5 +9,16 @@
     "assigned_to": "aaa",
     "open": true,
     "status_text": "aaa"
+  },
+  {
+    "_id": 2,
+    "issue_title": "Fix error in posting data",
+    "issue_text": "When we post data it has an error.",
+    "created_on": "2022-06-06T08:23:19.994Z",
+    "updated_on": "2022-06-06T08:23:19.994Z",
+    "created_by": "Joe",
+    "assigned_to": "Joe",
+    "open": true,
+    "status_text": "In QA"
   }
 ]
