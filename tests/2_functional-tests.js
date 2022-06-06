@@ -88,7 +88,7 @@ suite("Functional Tests", function () {
         .query({ status_text: "test one filter" })
         .end(function (err, res) {
           res.body.forEach((issueResult) => {
-            assert.equal(issueResult.status_text, "test one filte");
+            assert.equal(issueResult.status_text, "test one filter");
           });
 
           done();
@@ -116,7 +116,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id, status_text: "put test" })
         .end(function (err, res) {
-          assert.equal(res.text, `'successfully updated', '_id': ${id}`);
+          assert.equal(res.text, `successfully updated, _id: ${id}`);
 
           done();
         });
@@ -129,7 +129,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id, status_text: "put test", open: false })
         .end(function (err, res) {
-          assert.equal(res.text, `'successfully updated', '_id': ${id}`);
+          assert.equal(res.text, `successfully updated, _id: ${id}`);
 
           done();
         });
@@ -153,7 +153,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id })
         .end(function (err, res) {
-          assert.equal(res.body.error, `no update field(s) sent, _id: ${id} `);
+          assert.equal(res.body.error, `no update field(s) sent, _id: ${id}`);
           done();
         });
     });
@@ -182,10 +182,7 @@ suite("Functional Tests", function () {
             .delete("/api/issues/apitest")
             .send({ _id: id })
             .end(function (err, res) {
-              assert.equal(
-                res.text,
-                `{ result: 'successfully deleted', '_id': ${id}}`
-              );
+              assert.equal(res.text, `successfully deleted, _id: ${id}}`);
               done();
             });
         });

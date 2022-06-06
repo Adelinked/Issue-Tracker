@@ -108,7 +108,7 @@ module.exports = function (app) {
       }
 
       if (Object.values(response).filter((i) => i !== "").length <= 1) {
-        res.json({ error: `no update field(s) sent, _id: ${id} ` });
+        res.json({ error: `no update field(s) sent, _id: ${id}` });
         return;
       }
 
@@ -131,7 +131,7 @@ module.exports = function (app) {
             res.json({ error: `could not update, _id:${id}` });
             return;
           }
-          res.send(`'successfully updated', '_id': ${id}`);
+          res.send(`successfully updated, _id: ${id}`);
         });
       });
     })
@@ -163,7 +163,7 @@ module.exports = function (app) {
             res.json({ error: `could not delete, _id:${id}` });
             return;
           }
-          res.send(`{ result: 'successfully deleted', '_id': ${id}}`);
+          res.send(`successfully deleted, _id: ${id}}`);
         });
       });
     });
