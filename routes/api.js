@@ -71,15 +71,15 @@ module.exports = function (app) {
             ? Math.max(...readData.map((i) => Number(i._id))) + 1
             : 1;
         const response = {
+          _id: id,
           issue_title,
           issue_text,
-          created_by,
-          assigned_to,
-          status_text,
           created_on,
           updated_on,
-          open,
-          _id: id,
+          created_by,
+          assigned_to,
+          open: true,
+          status_text,
         };
         readData = [...readData, response];
         writeFile(fname, JSON.stringify(readData, null, 2), (error) => {
