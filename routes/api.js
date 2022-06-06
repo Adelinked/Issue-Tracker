@@ -30,10 +30,9 @@ module.exports = function (app) {
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          //console.log("get error", project);
-          return res.send(`${project} project doesn't exist`);
+          res.json({ error: `${project} project doesn't exist` });
+          return;
         }
-        // console.log(JSON.parse(data));
         let result = JSON.parse(data);
 
         result =
@@ -55,8 +54,10 @@ module.exports = function (app) {
         assigned_to = "",
         status_text = "",
       } = req.body;
-      if (!issue_title || !issue_text || !created_by)
-        return (res.send = "{ error: 'required field(s) missing' }");
+      if (!issue_title || !issue_text || !created_by) {
+        res.json({ error: "required field(s) missing" });
+        return;
+      }
 
       const created_on = new Date();
       const updated_on = created_on;
@@ -101,21 +102,34 @@ module.exports = function (app) {
 
       const response = req.body;
       const id = response._id;
-      if (!id) return (res.send = "{ error: 'missing _id' }");
-      if (Object.values(response).filter((i) => i !== "").length <= 1) {
-        return (res.send = `{ error: 'no update field(s) sent', '_id': ${id} }`);
+      if (!id) {
+        res.json({ error: "missing _id" });
+        return;
       }
+
+      if (Object.values(response).filter((i) => i !== "").length <= 1) {
+        res.json({ error: `no update field(s) sent, _id: ${id} ` });
+        return;
+      }
+
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          return (res.send = `{ error: 'could not update', '_id': ${id} }`);
+          res.json({ error: `could not update, id_:${id}` });
+          return;
         }
         let result = JSON.parse(data);
+
+        if (result.filter((i) => i._id == id).length < 1) {
+          res.json({ error: `could not update, id_:${id}` });
+          return;
+        }
         result = result.map((i) =>
           i._id == id ? { ...i, ...response, updated_on: new Date() } : i
         );
         writeFile(fname, JSON.stringify(result, null, 2), (error) => {
           if (error) {
-            return (res.send = `{ error: 'could not update', '_id': ${id} }`);
+            res.json({ error: `could not update, _id:${id}` });
+            return;
           }
           res.send(`{  result: 'successfully updated', '_id': ${id} }`);
         });
@@ -127,18 +141,27 @@ module.exports = function (app) {
 
       const response = req.body;
       const id = response._id;
-      if (!id) return (res.send = "{ error: 'missing _id' }");
+      if (!id) {
+        res.json({ error: `missing _id` });
+        return;
+      }
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          return (res.send = `{ error: 'could not delete', '_id': ${id} }`);
+          res.json({ error: `could not delete, _id:${id}` });
+          return;
         }
         let result = JSON.parse(data);
+        if (result.filter((i) => i._id == id).length < 1) {
+          res.json({ error: `could not delete, _id:${id}` });
+          return;
+        }
         result = result.filter((i) => i._id != id);
 
         writeFile(fname, JSON.stringify(result, null, 2), (error) => {
           if (error) {
-            return (res.send = `{ error: 'could not delete', '_id': ${id} }`);
+            res.json({ error: `could not delete, _id:${id}` });
+            return;
           }
           res.send(`{ result: 'successfully deleted', '_id': ${id}}`);
         });
