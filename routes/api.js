@@ -30,8 +30,8 @@ module.exports = function (app) {
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          res.json({ error: `${project} project doesn't exist` });
-          return;
+          //res.json({ error: `${project} project doesn't exist` });
+          //return;
         }
         let result = JSON.parse(data);
 
@@ -66,7 +66,13 @@ module.exports = function (app) {
       let readData = [];
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          return;
+          writeFile(fname, JSON.stringify(readData, null, 2), (error) => {
+            if (error) {
+              // console.log("An error has occurred ", error);
+              return;
+            }
+            //console.log("Data written successfully to disk");
+          });
         }
         readData = JSON.parse(data);
         const id =
