@@ -109,7 +109,7 @@ module.exports = function (app) {
       const response = req.body;
       const id = response._id;
       if (!id) {
-        res.json({ error: "missing _id" });
+        res.json({ error: "missing_id" });
         return;
       }
 

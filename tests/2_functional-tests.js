@@ -142,7 +142,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ status_text: "put test", open: false })
         .end(function (err, res) {
-          assert.equal(res.body.error, "missing _id");
+          assert.equal(res.body.error, "missing_id");
           done();
         });
     });
