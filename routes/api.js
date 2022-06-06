@@ -32,6 +32,15 @@ module.exports = function (app) {
         if (error) {
           //res.json({ error: `${project} project doesn't exist` });
           //return;
+          let emptyArr = [];
+          writeFile(fname, JSON.stringify(emptyArr, null, 2), (errorWr) => {
+            if (errorWr) {
+              // console.log("An error has occurred ", error);
+              return;
+            }
+            //console.log("Data written successfully to disk");
+          });
+          return;
         }
         let result = JSON.parse(data);
 
@@ -73,6 +82,7 @@ module.exports = function (app) {
             }
             //console.log("Data written successfully to disk");
           });
+          return;
         }
         readData = JSON.parse(data);
         const id =
