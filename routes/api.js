@@ -79,7 +79,6 @@ module.exports = function (app) {
           readData.length > 0
             ? String(Math.max(...readData.map((i) => Number(i._id))) + 1)
             : "1";
-        console.log(typeof id);
         const response = {
           _id: String(id),
           issue_title,

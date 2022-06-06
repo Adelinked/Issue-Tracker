@@ -24,6 +24,15 @@ suite("Functional Tests", function () {
         .send(postData)
         .end(function (err, res) {
           assert.equal(res.status, 200);
+          assert.equal(res.body.issue_title, "Fix error in posting data");
+          assert.equal(
+            res.body.issue_text,
+            "When we post data it has an error."
+          );
+          assert.equal(res.body.created_by, "Joe");
+          assert.equal(res.body.assigned_to, "Joe");
+          assert.equal(res.body.open, true);
+          assert.equal(res.body.status_text, "In QA");
           done();
         });
     });
