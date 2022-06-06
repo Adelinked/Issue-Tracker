@@ -131,7 +131,7 @@ module.exports = function (app) {
             res.json({ error: `could not update, _id:${id}` });
             return;
           }
-          res.send(`{  result: 'successfully updated', '_id': ${id} }`);
+          res.send(`'successfully updated', '_id': ${id}`);
         });
       });
     })
