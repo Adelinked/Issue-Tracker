@@ -108,19 +108,19 @@ module.exports = function (app) {
       }
 
       if (Object.values(response).filter((i) => i !== "").length <= 1) {
-        res.json({ error: `no update field(s) sent, _id: ${id}` });
+        res.json({ error: "no update field(s) sent", _id: id });
         return;
       }
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          res.json({ error: `could not update, id_:${id}` });
+          res.json({ error: "could not update", _id: id });
           return;
         }
         let result = JSON.parse(data);
 
         if (result.filter((i) => i._id == id).length < 1) {
-          res.json({ error: `could not update, id_:${id}` });
+          res.json({ error: "could not update", _id: id });
           return;
         }
         result = result.map((i) =>
@@ -128,10 +128,10 @@ module.exports = function (app) {
         );
         writeFile(fname, JSON.stringify(result, null, 2), (error) => {
           if (error) {
-            res.json({ error: `could not update, _id:${id}` });
+            res.json({ error: "could not update", _id: id });
             return;
           }
-          res.json({ result: `successfully updated`, _id: `${id}` });
+          res.json({ result: "successfully updated", _id: id });
         });
       });
     })
@@ -142,28 +142,28 @@ module.exports = function (app) {
       const response = req.body;
       const id = response._id;
       if (!id) {
-        res.json({ error: `missing _id` });
+        res.json({ error: "missing _id" });
         return;
       }
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          res.json({ error: `could not delete, _id:${id}` });
+          res.json({ error: "could not delete", _id: id });
           return;
         }
         let result = JSON.parse(data);
         if (result.filter((i) => i._id == id).length < 1) {
-          res.json({ error: `could not delete, _id:${id}` });
+          res.json({ error: "could not delete", _id: id });
           return;
         }
         result = result.filter((i) => i._id != id);
 
         writeFile(fname, JSON.stringify(result, null, 2), (error) => {
           if (error) {
-            res.json({ error: `could not delete, _id:${id}` });
+            res.json({ error: "could not delete", _id: id });
             return;
           }
-          res.json({ result: `successfully deleted`, _id: `${id}` });
+          res.json({ result: "successfully deleted", _id: id });
         });
       });
     });

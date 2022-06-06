@@ -154,7 +154,8 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id })
         .end(function (err, res) {
-          assert.equal(res.body.error, `no update field(s) sent, _id: ${id}`);
+          assert.equal(res.body.error, "no update field(s) sent");
+          assert.equal(res.body._id, id);
           done();
         });
     });
@@ -166,7 +167,8 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id, status_text: "put test", open: false })
         .end(function (err, res) {
-          assert.equal(res.body.error, `could not update, id_:${id}`);
+          assert.equal(res.body.error, "could not update");
+          assert.equal(res.body._id, id);
           done();
         });
     });
@@ -197,7 +199,9 @@ suite("Functional Tests", function () {
         .delete("/api/issues/apitest")
         .send({ _id: id })
         .end(function (err, res) {
-          assert.equal(res.body.error, `could not delete, _id:${id}`);
+          assert.equal(res.body.error, "could not delete");
+          assert.equal(res.body._id, id);
+
           done();
         });
     });
@@ -208,7 +212,7 @@ suite("Functional Tests", function () {
         .delete("/api/issues/apitest")
         .send({})
         .end(function (err, res) {
-          assert.equal(res.body.error, `missing _id`);
+          assert.equal(res.body.error, "missing _id");
           done();
         });
     });
