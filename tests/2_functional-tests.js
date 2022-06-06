@@ -24,7 +24,6 @@ suite("Functional Tests", function () {
         .send(postData)
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          assert.equal(res.project, "testapi");
           assert.equal(res.body.issue_title, "Fix error in posting data");
           assert.equal(
             res.body.issue_text,
@@ -86,7 +85,6 @@ suite("Functional Tests", function () {
           assert.property(res.body[0], "open");
           assert.property(res.body[0], "status_text");
           assert.property(res.body[0], "_id");
-
           done();
         });
     });
@@ -95,12 +93,11 @@ suite("Functional Tests", function () {
       chai
         .request(server)
         .get("/api/issues/apitest")
-        .query({ status_text: "test one filter" })
+        .query({ status_text: "In QA" })
         .end(function (err, res) {
           res.body.forEach((issueResult) => {
-            assert.equal(issueResult.status_text, "test one filter");
+            assert.equal(issueResult.status_text, "In QA");
           });
-
           done();
         });
     });
