@@ -94,8 +94,8 @@ suite("Functional Tests", function () {
     test("View issues on a project with one filter: GET request to /api/issues/{project}", function (done) {
       chai
         .request(server)
-        .get("/api/issues/apitest")
-        .query({ status_text: "In QA" })
+        .get("/api/issues/apitest?status_text=In QA")
+        /*.query({ status_text: "In QA" })*/
         .end(function (err, res) {
           res.body.forEach((issueResult) => {
             assert.equal(issueResult.status_text, "In QA");

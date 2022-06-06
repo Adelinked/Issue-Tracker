@@ -48,7 +48,7 @@ module.exports = function (app) {
           Object.keys(query).length === 0
             ? result
             : result.filter((i) => eval(filter));
-        res.send(result);
+        res.json(result);
       });
     })
 
