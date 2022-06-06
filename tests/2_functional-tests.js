@@ -24,6 +24,7 @@ suite("Functional Tests", function () {
         .send(postData)
         .end(function (err, res) {
           assert.equal(res.status, 200);
+          assert.equal(res.project, "testapi");
           assert.equal(res.body.issue_title, "Fix error in posting data");
           assert.equal(
             res.body.issue_text,
