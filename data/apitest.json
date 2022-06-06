@@ -4,7 +4,7 @@
     "issue_title": "Fix error in posting data",
     "issue_text": "When we post data it has an error.",
     "created_on": "2022-06-06T09:45:01.888Z",
-    "updated_on": "2022-06-06T14:01:19.828Z",
+    "updated_on": "2022-06-06T14:12:15.064Z",
     "created_by": "Joe",
     "assigned_to": "Joe",
     "open": true,
@@ -15,7 +15,7 @@
     "issue_title": "Fix error in posting data",
     "issue_text": "When we post data it has an error.",
     "created_on": "2022-06-06T10:27:54.627Z",
-    "updated_on": "2022-06-06T14:01:19.872Z",
+    "updated_on": "2022-06-06T14:12:15.088Z",
     "created_by": "Joe",
     "assigned_to": "Joe",
     "open": false,
@@ -757,5 +757,16 @@
     "assigned_to": "here",
     "open": true,
     "status_text": "here"
+  },
+  {
+    "_id": 71,
+    "issue_title": "Fix error in posting data",
+    "issue_text": "When we post data it has an error.",
+    "created_on": "2022-06-06T14:12:14.933Z",
+    "updated_on": "2022-06-06T14:12:14.933Z",
+    "created_by": "Joe",
+    "assigned_to": "Joe",
+    "open": true,
+    "status_text": "In QA"
   }
 ]

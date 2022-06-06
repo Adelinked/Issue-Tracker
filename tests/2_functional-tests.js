@@ -116,10 +116,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id, status_text: "put test" })
         .end(function (err, res) {
-          assert.equal(
-            res.text,
-            `{  result: 'successfully updated', '_id': ${id} }`
-          );
+          assert.equal(res.text, `'successfully updated', '_id': ${id}`);
 
           done();
         });
@@ -132,10 +129,7 @@ suite("Functional Tests", function () {
         .put("/api/issues/apitest")
         .send({ _id: id, status_text: "put test", open: false })
         .end(function (err, res) {
-          assert.equal(
-            res.text,
-            `{  result: 'successfully updated', '_id': ${id} }`
-          );
+          assert.equal(res.text, `'successfully updated', '_id': ${id}`);
 
           done();
         });
