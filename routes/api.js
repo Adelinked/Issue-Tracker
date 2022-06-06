@@ -131,7 +131,7 @@ module.exports = function (app) {
             res.json({ error: `could not update, _id:${id}` });
             return;
           }
-          res.json({ result: `successfully updated, _id: ${id}` });
+          res.json({ result: `successfully updated`, _id: `${id}` });
         });
       });
     })
@@ -163,7 +163,7 @@ module.exports = function (app) {
             res.json({ error: `could not delete, _id:${id}` });
             return;
           }
-          res.json({ result: `successfully deleted, _id: ${id}` });
+          res.json({ result: `successfully deleted`, _id: `${id}` });
         });
       });
     });
