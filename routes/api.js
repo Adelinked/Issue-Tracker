@@ -75,8 +75,8 @@ module.exports = function (app) {
       let readData = [];
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
-          writeFile(fname, JSON.stringify(readData, null, 2), (error) => {
-            if (error) {
+          writeFile(fname, JSON.stringify(readData, null, 2), (errorWr) => {
+            if (errorWr) {
               // console.log("An error has occurred ", error);
               return;
             }
