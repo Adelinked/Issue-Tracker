@@ -84,6 +84,7 @@ module.exports = function (app) {
             //console.log("Data written successfully to disk");
           });
           res.json([]);
+
           return;
         }
         readData = JSON.parse(data);
@@ -92,15 +93,15 @@ module.exports = function (app) {
             ? String(Math.max(...readData.map((i) => Number(i._id))) + 1)
             : "1";
         const response = {
+          assigned_to,
+          status_text,
+          open: true,
           _id: String(id),
           issue_title,
           issue_text,
+          created_by,
           created_on,
           updated_on,
-          created_by,
-          assigned_to,
-          open: true,
-          status_text,
         };
         readData = [...readData, response];
         writeFile(fname, JSON.stringify(readData, null, 2), (error) => {
@@ -131,24 +132,10 @@ module.exports = function (app) {
       }
 
       fs.readFile(fname, "utf8", (error, data) => {
-        /*if (error) {
-          res.json({ error: "could not update", _id: id });
-          return;
-        }*/
-
         if (error) {
           res.json({ error: "could not update", _id: id });
-          writeFile(fname, JSON.stringify(readData, null, 2), (errorWr) => {
-            if (errorWr) {
-              // console.log("An error has occurred ", error);
-              return;
-            }
-            //console.log("Data written successfully to disk");
-          });
-          //res.json([]);
           return;
         }
-
         let result = JSON.parse(data);
 
         if (result.filter((i) => i._id == id).length < 1) {
