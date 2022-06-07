@@ -131,10 +131,24 @@ module.exports = function (app) {
       }
 
       fs.readFile(fname, "utf8", (error, data) => {
-        if (error) {
+        /*if (error) {
           res.json({ error: "could not update", _id: id });
           return;
+        }*/
+
+        if (error) {
+          res.json({ error: "could not update", _id: id });
+          writeFile(fname, JSON.stringify(readData, null, 2), (errorWr) => {
+            if (errorWr) {
+              // console.log("An error has occurred ", error);
+              return;
+            }
+            //console.log("Data written successfully to disk");
+          });
+          //res.json([]);
+          return;
         }
+
         let result = JSON.parse(data);
 
         if (result.filter((i) => i._id == id).length < 1) {
