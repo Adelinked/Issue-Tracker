@@ -24,6 +24,7 @@ suite("Functional Tests", function () {
         .send(postData)
         .end(function (err, res) {
           assert.equal(res.status, 200);
+          assert.isObject(res.body);
           assert.equal(res.body.issue_title, "Fix error in posting data");
           assert.equal(
             res.body.issue_text,
@@ -36,6 +37,7 @@ suite("Functional Tests", function () {
           done();
         });
     });
+
     // #2
     test("Create an issue with only required fields: POST request to /api/issues/{project}", function (done) {
       chai
@@ -95,7 +97,7 @@ suite("Functional Tests", function () {
       chai
         .request(server)
         .get("/api/issues/apitest?status_text=In QA")
-        /*.query({ status_text: "In QA" })*/
+        //.query({ status_text: "In QA" })
         .end(function (err, res) {
           res.body.forEach((issueResult) => {
             assert.equal(issueResult.status_text, "In QA");

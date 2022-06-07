@@ -77,6 +77,7 @@ module.exports = function (app) {
 
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
+          console.log("new project");
           const newResponse = {
             assigned_to,
             status_text,
@@ -96,10 +97,11 @@ module.exports = function (app) {
             }
             //console.log("Data written successfully to disk");
           });
-          res.json(newArr);
+          res.json(newResponse);
 
           return;
         }
+        console.log("Not new project");
         readData = JSON.parse(data);
         const id =
           readData.length > 0
