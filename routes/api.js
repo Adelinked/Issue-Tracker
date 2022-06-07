@@ -74,20 +74,21 @@ module.exports = function (app) {
       const open = true;
 
       let readData = [];
-      const newResponse = {
-        assigned_to,
-        status_text,
-        open: true,
-        _id: "1",
-        issue_title,
-        issue_text,
-        created_by,
-        created_on,
-        updated_on,
-      };
-      const newArr = [].push(newResponse);
+
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
+          const newResponse = {
+            assigned_to,
+            status_text,
+            open: true,
+            _id: "1",
+            issue_title,
+            issue_text,
+            created_by,
+            created_on,
+            updated_on,
+          };
+          const newArr = [newResponse];
           writeFile(fname, JSON.stringify(newArr, null, 2), (errorWr) => {
             if (errorWr) {
               // console.log("An error has occurred ", error);
