@@ -40,6 +40,7 @@ module.exports = function (app) {
             }
             //console.log("Data written successfully to disk");
           });
+          res.json([]);
           return;
         }
         let result = JSON.parse(data);
@@ -82,6 +83,7 @@ module.exports = function (app) {
             }
             //console.log("Data written successfully to disk");
           });
+          res.json([]);
           return;
         }
         readData = JSON.parse(data);
