@@ -64,17 +64,6 @@ module.exports = function (app) {
         assigned_to = "",
         status_text = "",
       } = req.body;
-      const response = {
-        assigned_to,
-        status_text,
-        open: true,
-        _id: String(id),
-        issue_title,
-        issue_text,
-        created_by,
-        created_on,
-        updated_on,
-      };
       if (!issue_title || !issue_text || !created_by) {
         res.json({ error: "required field(s) missing" });
         return;
@@ -85,7 +74,18 @@ module.exports = function (app) {
       const open = true;
 
       let readData = [];
-      let newArr = [].push(response);
+      const newResponse = {
+        assigned_to,
+        status_text,
+        open: true,
+        _id: "1",
+        issue_title,
+        issue_text,
+        created_by,
+        created_on,
+        updated_on,
+      };
+      const newArr = [].push(newResponse);
       fs.readFile(fname, "utf8", (error, data) => {
         if (error) {
           writeFile(fname, JSON.stringify(newArr, null, 2), (errorWr) => {
@@ -104,7 +104,17 @@ module.exports = function (app) {
           readData.length > 0
             ? String(Math.max(...readData.map((i) => Number(i._id))) + 1)
             : "1";
-
+        const response = {
+          assigned_to,
+          status_text,
+          open: true,
+          _id: String(id),
+          issue_title,
+          issue_text,
+          created_by,
+          created_on,
+          updated_on,
+        };
         readData = [...readData, response];
         writeFile(fname, JSON.stringify(readData, null, 2), (error) => {
           if (error) {
